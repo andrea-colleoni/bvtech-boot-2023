@@ -16,7 +16,7 @@ import it.bvtech.boot08.security.JwtAuthorizationFilter;
 import it.bvtech.boot08.service.CustomUserDetailsService;
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 public class SecurityConfig {
 	
 	@Autowired

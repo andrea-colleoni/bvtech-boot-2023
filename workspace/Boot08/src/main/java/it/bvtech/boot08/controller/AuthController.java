@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import it.bvtech.boot08.security.JwtUtil;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin(maxAge = 360000)
 public class AuthController {
 
 	@Autowired
@@ -42,7 +44,7 @@ public class AuthController {
 
         }catch (BadCredentialsException e){
         	e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }catch (Exception e){
         	e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
