@@ -1,0 +1,6 @@
+Username: <input type="text" #username><br>
+Password: <input type="password" #password><br>
+<button (click)="login(username.value, password.value)">Login</button>
+<hr>
+<button (click)="verifica()">Verifica Auth</button>
+{{risposta}}

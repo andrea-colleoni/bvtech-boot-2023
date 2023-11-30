@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Esercizio04 } from './services/esercizio-04.service';
 import { Commento } from './model/commento';
 import { Observable } from 'rxjs';
+import { RxStompService } from './services/rx-stomp.service';
+import { Message } from '@stomp/stompjs';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +14,19 @@ export class AppComponent implements OnInit {
   title = 'client04';
 
   commenti: Commento[] = [];
+  messaggi: string[] = [];
 
   constructor(
     private es: Esercizio04,
+    private rxStompService: RxStompService,
   ) {    
   }
 
   ngOnInit(): void {
-    this.getCommenti();
+    this.rxStompService.watch('/topic/greetings').subscribe((message: Message) => {
+      this.messaggi.push(message.body);
+      console.debug(message);
+    });
   }
 
   getCommenti() {
